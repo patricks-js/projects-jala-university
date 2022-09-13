@@ -82,6 +82,27 @@ class Robot:
         print("You created me, so take this super part")
         super.print_status()
 
+    def print_status(self):
+        print(self.color_code)
+        str_robot = robot_art.format(**self.get_part_status())
+        self.greet()
+        self.print_energy()
+        print(str_robot)
+        print(colors["White"])
+
+    def get_part_status(self):
+        part_status = {}
+        for part in self.parts:
+            status_dict = part.get_status_dict()
+            part_status.update(status_dict)
+        return part_status
+
+    def is_there_available_part(self):
+        for part in self.parts:
+            if part.is_available():
+                return True
+        return False
+
 
 robot1 = Robot("Megatron", colors["Cyan"], "Bill")
 robot2 = Robot("Outobot", colors["Red"], "Fih do Bill")
